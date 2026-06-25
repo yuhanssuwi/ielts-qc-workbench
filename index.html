@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>雅思带练课质检工作台</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>雅思带练课质检工作台</h1>
+        <p>浏览器本地处理 · v3 评分标准</p>
+      </div>
+      <div class="status" id="statusPill">待分析</div>
+    </header>
+
+    <main class="workspace">
+      <section class="input-panel">
+        <div class="panel-title">
+          <h2>材料</h2>
+          <span id="fileName"></span>
+        </div>
+
+        <label class="field">
+          <span>授课老师</span>
+          <input id="teacherName" type="text" placeholder="例如 Peggy" />
+        </label>
+
+        <label class="field">
+          <span>课堂逐字稿</span>
+          <input id="transcriptFile" type="file" accept=".pdf,.txt,.csv" />
+        </label>
+
+        <label class="field text-field">
+          <span>逐字稿文本</span>
+          <textarea id="transcriptText" placeholder="也可以直接粘贴逐字稿"></textarea>
+        </label>
+
+        <div class="error-box hidden" id="errorBox"></div>
+
+        <div class="actions">
+          <button class="primary" id="analyzeButton" type="button">开始质检</button>
+          <button class="secondary" id="clearButton" type="button">清空</button>
+        </div>
+      </section>
+
+      <section class="result-panel">
+        <div class="summary-grid">
+          <article class="score-block">
+            <span>综合得分</span>
+            <strong id="scoreValue">--</strong>
+            <em id="gradeValue">--</em>
+          </article>
+          <article>
+            <span>授课老师</span>
+            <strong id="teacherValue">--</strong>
+          </article>
+          <article>
+            <span>课堂时长</span>
+            <strong id="durationValue">--</strong>
+          </article>
+          <article>
+            <span>教师话语占比</span>
+            <strong id="tttValue">--</strong>
+          </article>
+        </div>
+
+        <div class="insight-strip hidden" id="insightStrip"></div>
+
+        <nav class="tabs" aria-label="结果视图">
+          <button class="active" data-tab="scores" type="button">评分</button>
+          <button data-tab="evidence" type="button">证据</button>
+          <button data-tab="report" type="button">报告</button>
+        </nav>
+
+        <section class="tab-panel active" id="scoresPanel">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>维度</th>
+                  <th>评级</th>
+                  <th>分数</th>
+                  <th>判断</th>
+                </tr>
+              </thead>
+              <tbody id="scoreRows">
+                <tr>
+                  <td colspan="4" class="empty-cell">等待分析结果</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="tab-panel" id="evidencePanel">
+          <div class="evidence-list" id="evidenceList">
+            <div class="empty-state">等待证据摘录</div>
+          </div>
+        </section>
+
+        <section class="tab-panel" id="reportPanel">
+          <div class="report-actions">
+            <button class="secondary" id="copyReportButton" type="button">复制报告</button>
+            <button class="secondary" id="downloadReportButton" type="button">下载报告</button>
+          </div>
+          <textarea id="reportText" spellcheck="false"></textarea>
+        </section>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
